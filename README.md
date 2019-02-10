@@ -49,12 +49,13 @@ npm install --save-dev webpack webpack-cli webpack-dev-server
   },
 ```
 * Add a webpack configuration file at `./webpack.config.js` with the content:
-* _Note: this includes content for babel and eslint that we haven't installed yet_
+* _Note: this includes content for babel, hot-module-loader, and eslint that we haven't installed yet_
 ```text
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   module: {
     rules: [
       {
@@ -72,8 +73,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    hot: true
   }
 };
 ```
@@ -106,6 +111,10 @@ npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-l
     "@babel/preset-react"
   ]
 }
+```
+* Install the hot module replacement
+```console
+npm install --save-dev react-hot-loader
 ```
 
 
