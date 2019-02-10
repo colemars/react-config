@@ -23,9 +23,16 @@ npm init
 ```
 * Create `./.gitignore` with the content:
 ```text
-node_modules
-build
-.DS_STORE
+# npm and build, allow index.html
+node_modules/
+dist/*
+!dist/index.html
+
+# mac
+.DS_STORE/
+
+# vim
+*.swp
 ```
 * Install react and react-dom
 ```console
@@ -42,22 +49,65 @@ npm install --save-dev webpack webpack-cli webpack-dev-server
   },
 ```
 * Add a webpack configuration file at `./webpack.config.js` with the content:
+* _Note: this includes content for babel and eslint that we haven't installed yet_
 ```text
 const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
   output: {
     publicPath: '/',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: './dist'
   }
 };
 ```
-* Create the src directory and entry point file at `./src/index.js` with the content:
+* Create the `./dist` directory and content file at `.dist/index.html` with the content:
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Application</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="./bundle.js"></script>
+  </body>
+</html>
+```
+* Create the `./src` directory and entry point file at `./src/index.js` with the content:
 ```javascript
 console.log("Minimal react setup");
 ```
+* Install the babel packages for transpiling back to javascript
+```console
+npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
+```
+* Create a babel configuration file at `./.babelrc` with the content:
+```text
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
+}
+```
+
 
 ## Known Bugs
 

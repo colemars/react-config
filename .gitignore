@@ -1,3 +1,11 @@
-node_modules
-dist
-.DS_STORE
+# npm and build, allow index.html
+node_modules/
+dist/*
+!dist/index.html
+
+# mac
+.DS_STORE/
+
+# vim
+*.swp
+
