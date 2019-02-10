@@ -21,6 +21,30 @@ cd react-config
 git init
 npm init
 ```
+* Install react and react-dom
+```console
+npm install --save react react-dom
+```
+* Install webpack, webpack-cli, and webpack-dev-server (webpack recommends a local-only installation)
+```console
+npm install --save-dev webpack webpack-cli webpack-dev-server
+```
+* Install the babel packages for transpiling jsx to javascript
+```console
+npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
+```
+* Install the hot module replacement
+```console
+npm install --save-dev react-hot-loader
+```
+* Add scripts to `./package.json` by adding the content:
+```text
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode production"
+  },
+```
 * Create `./.gitignore` with the content:
 ```text
 # npm and build, allow index.html
@@ -34,22 +58,7 @@ dist/*
 # vim
 *.swp
 ```
-* Install react and react-dom
-```console
-npm install --save react react-dom
-```
-* Install webpack and the cli and dev-server(webpack recommends local-only installation)
-```console
-npm install --save-dev webpack webpack-cli webpack-dev-server
-```
-* Add a build script using webpack in `./package.json`
-```text
-  "scripts": {
-    "build": "webpack --mode production"
-  },
-```
-* Add a webpack configuration file at `./webpack.config.js` with the content:
-* _Note: this includes content for babel, hot-module-loader, and eslint that we haven't installed yet_
+* Add the webpack configuration file `./webpack.config.js` with the content:
 ```text
 const webpack = require('webpack');
 const path = require('path');
@@ -82,7 +91,16 @@ module.exports = {
   }
 };
 ```
-* Create the `./dist` directory and content file at `.dist/index.html` with the content:
+* Create a babel configuration file at `./.babelrc` with the content:
+```text
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
+}
+```
+* Create a `./dist` directory and base file `.dist/index.html` with the content:
 ```html
 <!DOCTYPE html>
 <html>
@@ -95,28 +113,20 @@ module.exports = {
   </body>
 </html>
 ```
-* Create the `./src` directory and entry point file at `./src/index.js` with the content:
+* Create a `./src` directory and entry point file `./src/index.js` with the content:
 ```javascript
-console.log("Minimal react setup");
-```
-* Install the babel packages for transpiling back to javascript
-```console
-npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
-```
-* Create a babel configuration file at `./.babelrc` with the content:
-```text
-{
-  "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react"
-  ]
-}
-```
-* Install the hot module replacement
-```console
-npm install --save-dev react-hot-loader
-```
+import React from 'react';
+import ReactDOM from 'react-dom';
 
+const title = 'My Minimal React Webpack Babel Setup';
+
+ReactDOM.render(
+  <div>{title}</div>,
+  document.getElementById('app')
+);
+
+module.hot.accept();
+```
 
 ## Known Bugs
 
