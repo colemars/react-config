@@ -117,15 +117,28 @@ module.exports = {
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-const title = 'My Minimal React Webpack Babel Setup';
+import App from './components/App';
 
 ReactDOM.render(
-  <div>{title}</div>,
+  <App/>,
   document.getElementById('app')
 );
 
 module.hot.accept();
+```
+* Create a `./src/components` directory and an app component file `./src/components/App.jsx` with the content:
+```javascript
+import React from 'react';
+
+function App() {
+  return (
+    <div>
+      <h1>React Application</h1>
+    </div>
+  );
+}
+
+export default App;
 ```
 
 ## Known Bugs
