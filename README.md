@@ -4,16 +4,17 @@
 
 ## Description
 
-_This is a configuration setup for a React application. In this setup, I use the latest versions of all of the npm packages and the latest recommended setup from the package readmes to be as future-proof as possible_
+_This is a configuration setup for a React application. In this setup, I use the latest versions of all of the npm packages and the most current recommendations to be as future-proof as possible_
 
 _You can see the deployed app [here](https://philrmass.github.io/react-config/)._
 
-## Setup And Installation
+## To Build a New Project from this Configuration
 
 * Git clone the repository at https://github.com/philrmass/react-config.git to a local directory
 * Add your own project code
 
 ## Steps to Recreate this Configuration
+
 * Create the directory, init git and npm (you can accept the defaults, creates package.json)
 ```console
 mkdir react-config
@@ -21,15 +22,12 @@ cd react-config
 git init
 npm init
 ```
-* Install react and react-dom
-```console
-npm install --save react react-dom
-```
-* Install webpack, webpack-cli, and webpack-dev-server (webpack recommends a local-only installation)
+* Install webpack, webpack-cli, and webpack-dev-server
+* _Note: all packages are installed locally in the project (no globals) and can be accessed via package.json scripts_
 ```console
 npm install --save-dev webpack webpack-cli webpack-dev-server
 ```
-* Install the babel packages for transpiling jsx to javascript
+* Install the babel packages
 ```console
 npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
 ```
@@ -40,6 +38,10 @@ npm install --save-dev react-hot-loader
 * Install eslint and the eslint webpack loader
 ```console
 npm install --save-dev eslint eslint-loader eslint-plugin-react
+```
+* Install react and react-dom
+```console
+npm install --save react react-dom
 ```
 * Add scripts to `./package.json` by adding the content:
 ```text
@@ -195,11 +197,11 @@ export default App;
 ```
 
 I put together the information contained here from the following sources:
-https://webpack.js.org/guides/installation/
-https://webpack.js.org/guides/getting-started/
-https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
-https://github.com/webpack-contrib/eslint-loader
-https://www.learnhowtoprogram.com/react
+* https://webpack.js.org/guides/installation/
+* https://webpack.js.org/guides/getting-started/
+* https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
+* https://github.com/webpack-contrib/eslint-loader
+* https://www.learnhowtoprogram.com/react
 
 ## Known Bugs
 
