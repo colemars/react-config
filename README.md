@@ -37,6 +37,10 @@ npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-l
 ```console
 npm install --save-dev react-hot-loader
 ```
+* Install eslint and the eslint webpack loader
+```console
+npm install --save-dev eslint eslint-loader eslint-plugin-react
+```
 * Add scripts to `./package.json` by adding the content:
 ```text
   "scripts": {
@@ -49,8 +53,8 @@ npm install --save-dev react-hot-loader
 ```text
 # npm and build, allow index.html
 node_modules/
-dist/*
-!dist/index.html
+public/*
+!public/index.html
 
 # mac
 .DS_STORE/
@@ -70,6 +74,11 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
+        use: ['eslint-loader']
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: ['babel-loader']
       }
     ]
@@ -79,14 +88,14 @@ module.exports = {
   },
   output: {
     publicPath: '/',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: './public',
     hot: true
   }
 };
@@ -100,7 +109,46 @@ module.exports = {
   ]
 }
 ```
-* Create a `./dist` directory and base file `.dist/index.html` with the content:
+* Create an eslint configuration file at `./.eslintrc.json` with the content:
+```text
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}
+```
+* Create a `./public` directory and base file `.public/index.html` with the content:
 ```html
 <!DOCTYPE html>
 <html>

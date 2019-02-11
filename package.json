@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode production"
+    "start": "webpack-dev-server --mode production",
+    "lint": "eslint src/** src/**/**"
   },
   "author": "Phil Mass",
   "license": "ISC",
@@ -19,6 +20,9 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "eslint": "^5.13.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-react": "^7.12.4",
     "react-hot-loader": "^4.6.5",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",

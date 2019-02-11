@@ -7,6 +7,12 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        enforce: 'pre',
+        exclude: /node_modules/,
+        use: ['eslint-loader']
+      },
+      {
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
       }
@@ -17,14 +23,14 @@ module.exports = {
   },
   output: {
     publicPath: '/',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: './public',
     hot: true
   }
 };

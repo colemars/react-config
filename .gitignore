@@ -1,7 +1,7 @@
 # npm and build, allow index.html
 node_modules/
-dist/*
-!dist/index.html
+public/*
+!public/index.html
 
 # mac
 .DS_STORE/
