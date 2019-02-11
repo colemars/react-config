@@ -46,7 +46,8 @@ npm install --save-dev eslint eslint-loader eslint-plugin-react
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode production"
+    "start": "webpack-dev-server --mode production",
+    "lint": "eslint src/** src/**/**"
   },
 ```
 * Create `./.gitignore` with the content:
@@ -73,6 +74,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        enforce: 'pre',
         exclude: /node_modules/,
         use: ['eslint-loader']
       },
@@ -117,7 +119,10 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": [
+        "eslint:recommended", 
+        "plugin:react/recommended"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -161,7 +166,7 @@ module.exports = {
   </body>
 </html>
 ```
-* Create a `./src` directory and entry point file `./src/index.js` with the content:
+* Create a `./src` directory and entry point file `./src/index.jsx` with the content:
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -188,6 +193,13 @@ function App() {
 
 export default App;
 ```
+
+I put together the information contained here from the following sources:
+https://webpack.js.org/guides/installation/
+https://webpack.js.org/guides/getting-started/
+https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
+https://github.com/webpack-contrib/eslint-loader
+https://www.learnhowtoprogram.com/react
 
 ## Known Bugs
 
